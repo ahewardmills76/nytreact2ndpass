@@ -3,6 +3,20 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+/*
+======================================================================================================
+
+TO-DOS for setting up the database
+
+I will require mongoose as a const
+
+I will also require the necessary models from the models folder
+
+Then I will create post routes to send the JSON information to the nytreact Mongo Database
+
+========================================================================================================
+*/
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

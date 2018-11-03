@@ -10,3 +10,8 @@
 .input {
     width: 70%;
 }
+.articleContainer {
+    height: 200px;
+    background-color: beige;
+    margin: 10px;
+}

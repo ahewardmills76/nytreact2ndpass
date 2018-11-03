@@ -1,0 +1,8 @@
+/*
+
+This is where the article model will be held that exists in the mongo database.
+This data will capture the properties of the articles that are rendered into
+article divs from React receiving JSON data.  This will then be required by another
+Javascript file that connects to the nytreact mongo database
+
+*/

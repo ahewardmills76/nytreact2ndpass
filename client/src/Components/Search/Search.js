@@ -1,7 +1,8 @@
 import React from 'react';
 import './search.css';
 import Label from '../Label/Label';
-
+import axios from 'axios';
+// import { Link } from 'react-router-dom'
 
 
 
@@ -29,6 +30,16 @@ class Search extends React.Component {
 
         // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
         alert(`You just searched for articles about ${this.state.topic} between the dates ${this.state.startDate} and ${this.state.endDate}`);
+       
+        axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=b9f91d369ff59547cd47b931d8cbc56b:0:74623931&q=${this.state.topic}&begin_date=${this.state.startDate}&end_date=${this.state.endDate}`)
+        .then( res => {
+            console.log(res.data);
+             this.setState({ docs :  res.data.response.docs });
+        });
+
+        // Begin building an object to contain our API call's query parameters
+        // Set the API key
+       
         this.setState({
             topic: "",
             startDate: "",
@@ -42,7 +53,7 @@ class Search extends React.Component {
             <div className="searchContainer">
             <Label name="Search"/>
                 <p>
-                    Hello! What type of articles would you like to search for?
+                    Search for past and current articles (Use YYYYMMDD format for date)
                 </p>
                 <form className="form">
                     <input
@@ -70,6 +81,22 @@ class Search extends React.Component {
                     />
                     <button onClick={this.handleFormSubmit}>Submit</button>
                 </form>
+
+                { this.state.docs ?
+                    this.state.docs.map((e, index )=> {
+                        return(
+                            <div className="articleContainer" key={index}> 
+                                <div className="headLine">
+                                   { e.headline.main }
+                                </div>
+                                <div className="snippet"></div>
+                                <div className="link"> <a href={e.web_url}> {e.web_url}</a> </div>
+                            </div>
+                        )
+                    })
+                    :
+                    ""
+                }
             </div>
         );
     };
